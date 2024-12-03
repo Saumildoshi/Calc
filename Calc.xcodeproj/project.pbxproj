@@ -13,6 +13,8 @@
 		B08C03732CF9DBC600EC2E19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B08C03722CF9DBC600EC2E19 /* Assets.xcassets */; };
 		B08C03762CF9DBC600EC2E19 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B08C03752CF9DBC600EC2E19 /* Base */; };
 		B08C03842CF9DC3900EC2E19 /* CalcVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C03832CF9DC3900EC2E19 /* CalcVC.swift */; };
+		B08D8FD32CFAD79C00240E2D /* CalcViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D8FD22CFAD79C00240E2D /* CalcViewModal.swift */; };
+		B08D8FD62CFADA5800240E2D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B08C03752CF9DBC600EC2E19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B08C03772CF9DBC600EC2E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B08C03832CF9DC3900EC2E19 /* CalcVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcVC.swift; sourceTree = "<group>"; };
+		B08D8FD22CFAD79C00240E2D /* CalcViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcViewModal.swift; sourceTree = "<group>"; };
+		B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		B08C03682CF9DBC400EC2E19 /* Calc */ = {
 			isa = PBXGroup;
 			children = (
+				B08D8FD42CFADA4300240E2D /* Extension */,
 				B08C037D2CF9DBCB00EC2E19 /* AppDelegate */,
 				B08C037F2CF9DBDD00EC2E19 /* Screens */,
 				B08C037E2CF9DBD200EC2E19 /* Storyboard */,
@@ -104,6 +109,7 @@
 		B08C03812CF9DBF400EC2E19 /* ViewModal */ = {
 			isa = PBXGroup;
 			children = (
+				B08D8FD22CFAD79C00240E2D /* CalcViewModal.swift */,
 			);
 			path = ViewModal;
 			sourceTree = "<group>";
@@ -113,6 +119,14 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B08D8FD42CFADA4300240E2D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +201,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B08C036A2CF9DBC400EC2E19 /* AppDelegate.swift in Sources */,
+				B08D8FD62CFADA5800240E2D /* UIViewController + Extension.swift in Sources */,
+				B08D8FD32CFAD79C00240E2D /* CalcViewModal.swift in Sources */,
 				B08C036C2CF9DBC400EC2E19 /* SceneDelegate.swift in Sources */,
 				B08C03842CF9DC3900EC2E19 /* CalcVC.swift in Sources */,
 			);

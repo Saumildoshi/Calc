@@ -48,8 +48,16 @@ class CalcVC: UIViewController {
     }
     
     func addToWorkings(value: String) {
-        workings = workings + value
-        calcWorking.text = workings
+        
+        if value == "%" {
+            if let currentText = calcWorking.text, let currentNumber = Double(currentText) {
+                let percentageValue = currentNumber / 100
+                calcWorking.text = "\(percentageValue)"
+            }
+        } else {
+            workings = workings + value
+            calcWorking.text = workings
+        }
     }
     
     
@@ -107,9 +115,15 @@ class CalcVC: UIViewController {
     
     
     @IBAction func btnEqualTapped(_ sender: Any) {
+        
+        guard !workings.isEmpty else {
+            setupAlert(title: "Invalid Input", message: "Please enter a valid expression.")
+            return
+        }
+        
         if(validInput()) {
             let checkedWorkingForPercent = workings.replacingOccurrences(of: "%", with: "*0.01")
-           let expression = NSExpression(format: workings)
+            let expression = NSExpression(format: checkedWorkingForPercent)
             let result = expression.expressionValue(with: nil, context: nil) as! Double
             let resultString = formatResult(result: result)
             calcResult.text = resultString
@@ -118,8 +132,6 @@ class CalcVC: UIViewController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default))
             self.present(alert, animated: true,completion: nil)
         }
-        
-       
     }
     
     func validInput() -> Bool {
@@ -206,7 +218,13 @@ class CalcVC: UIViewController {
     }
     
     @IBAction func btnRemoveTapped(_ sender: Any) {
-        calcWorking.text?.removeLast()
+        
+        if let text = calcWorking.text, !text.isEmpty {
+            calcWorking.text = String(text.dropLast())
+            workings = String(workings.dropLast())
+        } else {
+            setupAlert(title: "Nothing to Remove", message: "The input is already empty.")
+        }
     }
     
     
@@ -215,15 +233,12 @@ class CalcVC: UIViewController {
     }
     
     
-    
-    
-    
     // MARK: - Web Service functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearAll()
         // Do any additional setup after loading the view.
     }
-
+    
 }
