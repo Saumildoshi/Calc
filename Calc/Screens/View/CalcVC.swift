@@ -50,14 +50,14 @@ class CalcVC: UIViewController {
     func addToWorkings(value: String) {
         
         if value == "%" {
-            if let currentText = calcWorking.text, let currentNumber = Double(currentText) {
-                let percentageValue = currentNumber / 100
-                calcWorking.text = "\(percentageValue)"
-            }
+            // Append percentage symbol to the workings
+            workings += "*0.01"
         } else {
-            workings = workings + value
-            calcWorking.text = workings
+            // Append other inputs to the workings
+            workings += value
         }
+        // Update the working label
+        calcWorking.text = workings
     }
     
     
@@ -105,7 +105,12 @@ class CalcVC: UIViewController {
     
     
     @IBAction func btnDotTapped(_ sender: Any) {
-        addToWorkings(value: ".")
+        if let lastNumber = workings.split(whereSeparator: { specialCharacters(char: $0) }).last,
+           !lastNumber.contains(".") {
+            addToWorkings(value: ".")
+        } else {
+            setupAlert(title: "Invalid Input", message: "A number cannot have multiple decimal points.")
+        }
     }
     
     
@@ -124,49 +129,50 @@ class CalcVC: UIViewController {
         if(validInput()) {
             let checkedWorkingForPercent = workings.replacingOccurrences(of: "%", with: "*0.01")
             let expression = NSExpression(format: checkedWorkingForPercent)
-            let result = expression.expressionValue(with: nil, context: nil) as! Double
-            let resultString = formatResult(result: result)
-            calcResult.text = resultString
+            if let result = expression.expressionValue(with: nil, context: nil) as? Double {
+                let resultString = formatResult(result: result)
+                calcResult.text = resultString
+            } else {
+                setupAlert(title: "Calculation Error", message: "Unable to evaluate the expression.")
+            }
         } else {
-            let alert = UIAlertController(title: "Invalid Input", message: "Calculator enable to do math based on input", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .default))
-            self.present(alert, animated: true,completion: nil)
+            setupAlert(title: "Invalid Input", message: "Calculator enable to do math based on input")
         }
     }
     
     func validInput() -> Bool {
-        
-        var count = 0
-        var funcCharIndexs = [Int]()
+        var correctedWorkings = ""
+        //var previousChar: Character? = nil
+        var lastOperator: Character? = nil
         
         for char in workings {
-            if(specialCharacters(char: char)) {
-                funcCharIndexs.append(count)
-            }
-            count += 1
-        }
-        
-        var previous: Int = -1
-        
-        for index in funcCharIndexs {
-            if(index == 0) {
-                return false
-            }
-            
-            if(index == workings.count - 1) {
-                return false
-            }
-            
-            if(previous != 1) {
-                if (index - previous == 1) {
-                    return false
+            if specialCharacters(char: char) {
+                // Handle negative numbers (e.g., * -6)
+                if char == "-" && lastOperator != nil {
+                    correctedWorkings.append(char) // Keep "-" as part of the negative number
+                    lastOperator = nil
+                    continue
                 }
+                // Replace consecutive operators with the last one
+                if let lastOp = lastOperator, specialCharacters(char: lastOp) {
+                    correctedWorkings.removeLast()
+                }
+                lastOperator = char
+            } else {
+                lastOperator = nil
             }
-            previous = index
+            correctedWorkings.append(char)
         }
         
-        return true
+        // Update workings and display
+        workings = correctedWorkings
+        calcWorking.text = workings
+        
+        // Ensure the input doesn't start or end with a special character
+        return !(workings.first.map(specialCharacters) ?? false || workings.last.map(specialCharacters) ?? false)
     }
+    
+    
     
     func specialCharacters(char: Character) -> Bool {
         if(char == "*") {
@@ -240,5 +246,19 @@ class CalcVC: UIViewController {
         clearAll()
         // Do any additional setup after loading the view.
     }
+    
+    //    override func viewDidLayoutSubviews() {
+    //        super.viewDidLayoutSubviews()
+    //
+    //        // Collect all buttons in an array
+    //        let buttons = [btnClear, btnRemove, btnPercentage, btnDevide, btnMultiply, btnEqual, btnPlus, btnMinus,
+    //                       btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine]
+    //
+    //        // Apply dynamic corner radius based on height
+    //        for button in buttons {
+    //            button?.layer.cornerRadius = (button?.frame.height ?? 0) / 2
+    //            button?.clipsToBounds = true // Ensures the corners are clipped
+    //        }
+    //    }
     
 }

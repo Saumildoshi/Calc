@@ -15,6 +15,8 @@
 		B08C03842CF9DC3900EC2E19 /* CalcVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C03832CF9DC3900EC2E19 /* CalcVC.swift */; };
 		B08D8FD32CFAD79C00240E2D /* CalcViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D8FD22CFAD79C00240E2D /* CalcViewModal.swift */; };
 		B08D8FD62CFADA5800240E2D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */; };
+		B09E54782D0023860077979B /* ViewCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09E54772D0023860077979B /* ViewCalc.swift */; };
+		B09E547B2D0023CC0077979B /* ViewModalCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09E547A2D0023CC0077979B /* ViewModalCalc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		B08C03832CF9DC3900EC2E19 /* CalcVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcVC.swift; sourceTree = "<group>"; };
 		B08D8FD22CFAD79C00240E2D /* CalcViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcViewModal.swift; sourceTree = "<group>"; };
 		B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		B09E54772D0023860077979B /* ViewCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCalc.swift; sourceTree = "<group>"; };
+		B09E547A2D0023CC0077979B /* ViewModalCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModalCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 		B08C03682CF9DBC400EC2E19 /* Calc */ = {
 			isa = PBXGroup;
 			children = (
+				B09E54762D0023790077979B /* MVVM */,
 				B08D8FD42CFADA4300240E2D /* Extension */,
 				B08C037D2CF9DBCB00EC2E19 /* AppDelegate */,
 				B08C037F2CF9DBDD00EC2E19 /* Screens */,
@@ -127,6 +132,15 @@
 				B08D8FD52CFADA5800240E2D /* UIViewController + Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B09E54762D0023790077979B /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				B09E54772D0023860077979B /* ViewCalc.swift */,
+				B09E547A2D0023CC0077979B /* ViewModalCalc.swift */,
+			);
+			path = MVVM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +216,11 @@
 			files = (
 				B08C036A2CF9DBC400EC2E19 /* AppDelegate.swift in Sources */,
 				B08D8FD62CFADA5800240E2D /* UIViewController + Extension.swift in Sources */,
+				B09E547B2D0023CC0077979B /* ViewModalCalc.swift in Sources */,
 				B08D8FD32CFAD79C00240E2D /* CalcViewModal.swift in Sources */,
 				B08C036C2CF9DBC400EC2E19 /* SceneDelegate.swift in Sources */,
 				B08C03842CF9DC3900EC2E19 /* CalcVC.swift in Sources */,
+				B09E54782D0023860077979B /* ViewCalc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
