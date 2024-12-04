@@ -43,22 +43,38 @@ class CalcVC: UIViewController {
     
     func clearAll() {
         workings = ""
-        calcWorking.text = ""
+        calcWorking.text = "0"
         calcResult.text = ""
     }
     
     func addToWorkings(value: String) {
         
+        if value == "-" {
+            if workings.isEmpty || specialCharacters(char: workings.last!) {
+                workings += value // Allow "-" for negative numbers
+                calcWorking.text = workings
+                return
+            }
+        }
+        
+        
+        // Check if the last character and the new value are both special characters
+        if let lastChar = workings.last, specialCharacters(char: lastChar), specialCharacters(char: Character(value)) {
+            setupAlert(title: "Invalid Input", message: "Consecutive operators are not allowed.")
+            return
+        }
+        
+        // Handle the "%" operator
         if value == "%" {
-            // Append percentage symbol to the workings
             workings += "*0.01"
         } else {
-            // Append other inputs to the workings
             workings += value
         }
+        
         // Update the working label
         calcWorking.text = workings
     }
+    
     
     
     // MARK: - Action functions
@@ -178,9 +194,6 @@ class CalcVC: UIViewController {
         if(char == "*") {
             return true
         }
-        if(char == "*") {
-            return true
-        }
         if(char == "/") {
             return true
         }
@@ -243,7 +256,7 @@ class CalcVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearAll()
+        
         // Do any additional setup after loading the view.
     }
     
